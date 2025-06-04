@@ -12,6 +12,7 @@ class AppLocalizations {
       'font_size': 'Font Size',
       'font_family': 'Font',
       'theme': 'Theme',
+      'dark_mode': 'Dark Mode',
       'language': 'Language',
       'reading_mode': 'Reading Mode',
       'ok': 'OK',
@@ -23,6 +24,7 @@ class AppLocalizations {
       'font_size': '字体大小',
       'font_family': '字体',
       'theme': '主题',
+      'dark_mode': '深色模式',
       'language': '语言',
       'reading_mode': '阅读模式',
       'ok': '确定',
@@ -34,6 +36,7 @@ class AppLocalizations {
       'font_size': '文字サイズ',
       'font_family': 'フォント',
       'theme': 'テーマ',
+      'dark_mode': 'ダークモード',
       'language': '言語',
       'reading_mode': 'リーディングモード',
       'ok': 'OK',
@@ -51,6 +54,7 @@ class AppLocalizations {
   String get fontSize => _text('font_size');
   String get fontFamily => _text('font_family');
   String get theme => _text('theme');
+  String get darkMode => _text('dark_mode');
   String get language => _text('language');
   String get readingMode => _text('reading_mode');
   String get ok => _text('ok');

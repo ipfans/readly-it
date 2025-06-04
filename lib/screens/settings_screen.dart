@@ -49,18 +49,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           const SizedBox(height: 8),
           Card(
-            child: ListTile(
-              title: Text(loc.theme),
-              trailing: DropdownButton<ThemeMode>(
-                value: _temp.themeMode,
-                onChanged: (mode) =>
-                    setState(() => _temp = _temp.copyWith(themeMode: mode)),
-                items: const [
-                  DropdownMenuItem(value: ThemeMode.system, child: Text('System')),
-                  DropdownMenuItem(value: ThemeMode.light, child: Text('Light')),
-                  DropdownMenuItem(value: ThemeMode.dark, child: Text('Dark')),
-                ],
-              ),
+            child: SwitchListTile.adaptive(
+              title: Text(loc.darkMode),
+              value: _temp.themeMode == ThemeMode.dark,
+              onChanged: (v) => setState(() =>
+                  _temp = _temp.copyWith(themeMode: v ? ThemeMode.dark : ThemeMode.light)),
             ),
           ),
           const SizedBox(height: 8),

@@ -9,7 +9,7 @@ It supports Android, iOS, macOS, Linux and Windows platforms.
 * Import Pocket export files (`.html`) through the app bar action.
 * Riverpod based state management with Hive persistence and optional iCloud sync.
 * Multi language user interface (English, 中文 and 日本語).
-* Appearance settings for theme mode, font size and default reading mode.
+* Appearance settings with light/dark mode toggle, font size and default reading mode.
 * Built in web view with toggleable reading mode.
 * Modern Material 3 UI with card-based reading list.
 * Modular storage layer with in-memory implementation for unit tests.

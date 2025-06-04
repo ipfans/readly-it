@@ -10,7 +10,18 @@ import 'package:icloud_storage/icloud_storage.dart';
 import '../models/reading_item.dart';
 import '../models/settings.dart';
 
-class StorageService {
+/// Abstraction for persisting reading items and app settings.
+abstract class StorageService {
+  List<ReadingItem> get items;
+  Settings get settings;
+
+  Future<void> addItem(ReadingItem item);
+  Future<void> importItems(List<ReadingItem> items);
+  Future<void> updateSettings(Settings settings);
+}
+
+/// Hive based implementation with optional iCloud sync on iOS.
+class HiveStorageService implements StorageService {
   static const _itemsBox = 'itemsBox';
   static const _settingsBox = 'settingsBox';
   static const _icloudContainer = 'iCloud.com.example.readlyit';
@@ -19,16 +30,16 @@ class StorageService {
   late final Box _items;
   late final Box _settings;
 
-  StorageService._();
+  HiveStorageService._();
 
-  static Future<StorageService> create() async {
+  static Future<HiveStorageService> create() async {
     if (!kIsWeb) {
       Directory dir = await getApplicationDocumentsDirectory();
       await Hive.initFlutter(dir.path);
     } else {
       await Hive.initFlutter();
     }
-    final service = StorageService._();
+    final service = HiveStorageService._();
     service._items = await Hive.openBox(_itemsBox);
     service._settings = await Hive.openBox(_settingsBox);
     if (!kIsWeb && Platform.isIOS) {

@@ -12,6 +12,18 @@ It supports Android, iOS, macOS, Linux and Windows platforms.
 * Appearance settings for theme mode, font size and default reading mode.
 * Built in web view with toggleable reading mode.
 * Modern Material 3 UI with card-based reading list.
+* Modular storage layer with in-memory implementation for unit tests.
 
 This project is only a basic demo and can be extended with more
 functionality such as background sync or advanced parsing.
+
+## Testing
+
+Run unit tests with:
+
+```bash
+flutter test
+```
+
+The project includes model and provider tests using an in-memory
+storage service for fast execution.

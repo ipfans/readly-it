@@ -12,7 +12,7 @@ import 'screens/settings_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final storage = await StorageService.create();
+  final storage = await HiveStorageService.create();
   runApp(
     ProviderScope(
       overrides: [storageProvider.overrideWithValue(storage)],

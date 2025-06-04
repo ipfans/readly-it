@@ -1,16 +1,15 @@
-# readlyit
+# ReadlyIt
 
-A new Flutter project.
+ReadlyIt is a minimal **Read It Later** application built with Flutter.
+It supports Android, iOS, macOS, Linux and Windows platforms.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+* Import links from the system share menu using **receive_sharing_intent**.
+* Import Pocket export files (`.html`) through the app bar action.
+* Cross platform data storage using Hive with optional iCloud sync on iOS.
+* Multi language user interface (English, 中文 and 日本語).
+* Appearance settings for theme mode and font size.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project is only a basic demo and can be extended with more
+functionality such as background sync or advanced parsing.

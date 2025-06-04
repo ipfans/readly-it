@@ -54,15 +54,14 @@ class _ArticleScreenState extends ConsumerState<ArticleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Icon(_readingMode ? Icons.chrome_reader_mode : Icons.public),
-            onPressed: _toggle,
-          ),
-        ],
-      ),
+      appBar: AppBar(),
       body: WebViewWidget(controller: _controller),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _toggle,
+        child: Icon(
+          _readingMode ? Icons.chrome_reader_mode : Icons.public,
+        ),
+      ),
     );
   }
 }

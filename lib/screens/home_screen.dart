@@ -76,16 +76,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          return ListTile(
-            title: Text(item.title ?? item.url),
-            subtitle: Text(item.url),
-            onTap: () => _openUrl(item.url),
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: ListView.separated(
+          itemCount: items.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 8),
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return Card(
+              child: ListTile(
+                title: Text(item.title ?? item.url),
+                subtitle: Text(item.url),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => _openUrl(item.url),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

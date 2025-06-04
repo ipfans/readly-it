@@ -27,16 +27,22 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);
+    final baseTextTheme = ThemeData.light().textTheme.apply(
+          fontSizeFactor: settings.fontSize / 14,
+          fontFamily: settings.fontFamily == 'System' ? null : settings.fontFamily,
+        );
     return MaterialApp(
       title: 'ReadlyIt',
       themeMode: settings.themeMode,
       theme: ThemeData(
-        textTheme:
-            ThemeData.light().textTheme.apply(fontSizeFactor: settings.fontSize / 14),
+        useMaterial3: true,
+        colorSchemeSeed: Colors.teal,
+        textTheme: baseTextTheme,
       ),
       darkTheme: ThemeData.dark().copyWith(
-        textTheme:
-            ThemeData.dark().textTheme.apply(fontSizeFactor: settings.fontSize / 14),
+        useMaterial3: true,
+        colorSchemeSeed: Colors.teal,
+        textTheme: baseTextTheme,
       ),
       locale: settings.locale,
       localizationsDelegates: const [

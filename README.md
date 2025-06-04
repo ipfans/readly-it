@@ -11,6 +11,7 @@ It supports Android, iOS, macOS, Linux and Windows platforms.
 * Multi language user interface (English, 中文 and 日本語).
 * Appearance settings for theme mode, font size and default reading mode.
 * Built in web view with toggleable reading mode.
+* Modern Material 3 UI with card-based reading list.
 
 This project is only a basic demo and can be extended with more
 functionality such as background sync or advanced parsing.

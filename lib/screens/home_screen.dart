@@ -3,21 +3,21 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/reading_item.dart';
 import '../providers/reading_list_provider.dart';
-import 'package:provider/provider.dart';
+import 'article_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
@@ -29,9 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (value == null) return;
     final uri = Uri.tryParse(value);
     if (uri != null && (uri.hasScheme && uri.host.isNotEmpty)) {
-      final provider =
-          context.read<ReadingListProvider>();
-      provider.add(value);
+      ref.read(readingListProvider.notifier).add(value);
     }
   }
 
@@ -42,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final file = File(result.files.single.path!);
       final text = await file.readAsString();
       final items = _parsePocketExport(text);
-      await context.read<ReadingListProvider>().import(items);
+      await ref.read(readingListProvider.notifier).import(items);
       if (mounted) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(loc.importPocket)));
@@ -61,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
-    final items = context.watch<ReadingListProvider>().items;
+    final items = ref.watch(readingListProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(loc.appTitle),
@@ -93,7 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _openUrl(String url) {
-    final uri = Uri.parse(url);
-    launchUrl(uri, mode: LaunchMode.externalApplication);
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => ArticleScreen(url: url)),
+    );
   }
 }

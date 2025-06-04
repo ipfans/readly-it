@@ -1,21 +1,26 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/reading_item.dart';
 import '../services/storage_service.dart';
+import 'storage_provider.dart';
 
-class ReadingListProvider extends ChangeNotifier {
+class ReadingListNotifier extends StateNotifier<List<ReadingItem>> {
   final StorageService storage;
-  ReadingListProvider(this.storage);
-
-  List<ReadingItem> get items => storage.items;
+  ReadingListNotifier(this.storage) : super(storage.items);
 
   Future<void> add(String url, {String? title}) async {
     await storage.addItem(ReadingItem(url: url, title: title));
-    notifyListeners();
+    state = storage.items;
   }
 
   Future<void> import(List<ReadingItem> items) async {
     await storage.importItems(items);
-    notifyListeners();
+    state = storage.items;
   }
 }
+
+final readingListProvider =
+    StateNotifierProvider<ReadingListNotifier, List<ReadingItem>>((ref) {
+  final storage = ref.watch(storageProvider);
+  return ReadingListNotifier(storage);
+});

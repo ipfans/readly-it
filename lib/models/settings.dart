@@ -6,12 +6,14 @@ class Settings {
   final double fontSize;
   final String fontFamily;
   final Locale locale;
+  final bool readingMode;
 
   Settings({
     this.themeMode = ThemeMode.system,
     this.fontSize = 14,
     this.fontFamily = 'System',
     this.locale = const Locale('en'),
+    this.readingMode = false,
   });
 
   Settings copyWith({
@@ -19,12 +21,14 @@ class Settings {
     double? fontSize,
     String? fontFamily,
     Locale? locale,
+    bool? readingMode,
   }) =>
       Settings(
         themeMode: themeMode ?? this.themeMode,
         fontSize: fontSize ?? this.fontSize,
         fontFamily: fontFamily ?? this.fontFamily,
         locale: locale ?? this.locale,
+        readingMode: readingMode ?? this.readingMode,
       );
 
   Map<String, dynamic> toMap() => {
@@ -32,6 +36,7 @@ class Settings {
         'fontSize': fontSize,
         'fontFamily': fontFamily,
         'locale': locale.toLanguageTag(),
+        'readingMode': readingMode,
       };
 
   factory Settings.fromMap(Map<String, dynamic> map) => Settings(
@@ -39,6 +44,7 @@ class Settings {
         fontSize: (map['fontSize'] as num).toDouble(),
         fontFamily: map['fontFamily'] as String,
         locale: Locale.fromSubtags(languageCode: map['locale'] as String),
+        readingMode: map['readingMode'] as bool? ?? false,
       );
 
   String toJson() => jsonEncode(toMap());

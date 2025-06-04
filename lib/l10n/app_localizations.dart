@@ -13,6 +13,7 @@ class AppLocalizations {
       'font_family': 'Font',
       'theme': 'Theme',
       'language': 'Language',
+      'reading_mode': 'Reading Mode',
     },
     'zh': {
       'app_title': '稍后阅读',
@@ -22,6 +23,7 @@ class AppLocalizations {
       'font_family': '字体',
       'theme': '主题',
       'language': '语言',
+      'reading_mode': '阅读模式',
     },
     'ja': {
       'app_title': '後で読む',
@@ -31,6 +33,7 @@ class AppLocalizations {
       'font_family': 'フォント',
       'theme': 'テーマ',
       'language': '言語',
+      'reading_mode': 'リーディングモード',
     },
   };
 
@@ -46,6 +49,7 @@ class AppLocalizations {
   String get fontFamily => _text('font_family');
   String get theme => _text('theme');
   String get language => _text('language');
+  String get readingMode => _text('reading_mode');
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();

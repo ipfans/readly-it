@@ -7,9 +7,10 @@ It supports Android, iOS, macOS, Linux and Windows platforms.
 
 * Import links from the system share menu using **receive_sharing_intent**.
 * Import Pocket export files (`.html`) through the app bar action.
-* Cross platform data storage using Hive with optional iCloud sync on iOS.
+* Riverpod based state management with Hive persistence and optional iCloud sync.
 * Multi language user interface (English, 中文 and 日本語).
-* Appearance settings for theme mode and font size.
+* Appearance settings for theme mode, font size and default reading mode.
+* Built in web view with toggleable reading mode.
 
 This project is only a basic demo and can be extended with more
 functionality such as background sync or advanced parsing.

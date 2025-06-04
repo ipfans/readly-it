@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/settings.dart';
 import '../providers/settings_provider.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   late Settings _temp;
 
   @override
   void initState() {
     super.initState();
-    final settings = context.read<SettingsProvider>().settings;
+    final settings = ref.read(settingsProvider);
     _temp = settings;
   }
 
@@ -61,10 +61,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               DropdownMenuItem(value: Locale('ja'), child: Text('日本語')),
             ],
           ),
+          SwitchListTile(
+            title: Text(loc.readingMode),
+            value: _temp.readingMode,
+            onChanged: (v) =>
+                setState(() => _temp = _temp.copyWith(readingMode: v)),
+          ),
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
-              context.read<SettingsProvider>().update(_temp);
+              ref.read(settingsProvider.notifier).update(_temp);
               Navigator.of(context).pop();
             },
             child: Text('OK'),

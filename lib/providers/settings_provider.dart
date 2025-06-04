@@ -1,19 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/settings.dart';
 import '../services/storage_service.dart';
+import 'storage_provider.dart';
 
-class SettingsProvider extends ChangeNotifier {
+class SettingsNotifier extends StateNotifier<Settings> {
   final StorageService storage;
-  Settings _settings;
-
-  SettingsProvider(this.storage) : _settings = storage.settings;
-
-  Settings get settings => _settings;
+  SettingsNotifier(this.storage) : super(storage.settings);
 
   Future<void> update(Settings settings) async {
-    _settings = settings;
+    state = settings;
     await storage.updateSettings(settings);
-    notifyListeners();
   }
 }
+
+final settingsProvider =
+    StateNotifierProvider<SettingsNotifier, Settings>((ref) {
+  final storage = ref.watch(storageProvider);
+  return SettingsNotifier(storage);
+});
